@@ -20,7 +20,7 @@ Fixes and adds additional controller support for Ultimate Alliance PC 2006 versi
 - Italian language (Fullkeyset_ita) is not supported.
 
 --- v6.2 CHANGES ---
-* Updated EasyInstall.bat by ak2yny. Players can now have different controllers connected and different corresponding button icons in game all at the same time.
+* Updated EasyInstall.bat by ak2yny. BETA - Players can now have different controllers connected and different corresponding button icons in game all at the same time.
 * Removed the manual install method as it's redunant compared to the easyinstall.bat file. This now stands as the primary way of installing the mod besides the MO2 install method.
 * Some button icon textures now have been improved and worked on by ak2yny.
 * Reworked and organized many folders such as Nintendo controllers and Atari now having their own separate folders.
