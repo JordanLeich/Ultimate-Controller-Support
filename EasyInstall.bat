@@ -25,9 +25,9 @@ set m=
 if defined FBdone set opt=BFTX& if defined ITdone set Bdone=%sm%
 if defined ITdone set opt=BFTX
 CALL :TITLE 0
-echo [B] Both             %Bdone%
-echo [F] Fix button mapping only %FBdone%
-echo [T] Apply button textures only    %ITdone%
+echo [B] Both                       %Bdone%
+echo [F] Fix button mapping only    %FBdone%
+echo [T] Apply button textures only %ITdone%
 if %opt%==BFTX echo [X] Done. Close console.
 echo.
 choice /c %opt% /m "Please select an option:"
@@ -79,7 +79,7 @@ set "tex3=%tex%"
 set "tpp3=%tpp%"
 if %ask2%==false goto chooseTr
 echo.
-choice /m "BETA - Do you want to use separate icons for different controllers?"
+choice /m "BETA - Do you want to use separate icons for different controllers"
 if errorlevel 2 goto chooseTr
 call :switchT buttonT 3
 
