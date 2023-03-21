@@ -26,11 +26,11 @@ if defined FBdone set opt=BFTX& if defined ITdone set Bdone=%sm%
 if defined ITdone set opt=BFTX
 CALL :TITLE 0
 echo [B] Both             %Bdone%
-echo [F] Fix mapping only %FBdone%
-echo [T] Textures only    %ITdone%
+echo [F] Fix button mapping only %FBdone%
+echo [T] Apply button textures only    %ITdone%
 if %opt%==BFTX echo [X] Done. Close console.
 echo.
-choice /c %opt% /m "Fix controller button mapping or install controller button textures"
+choice /c %opt% /m "Please select an option:"
 echo.
 if errorlevel 4 EXIT
 if errorlevel 3 goto askCT
@@ -43,7 +43,7 @@ set deviceB=%devices:~,-1%
 :chooseD
 call :switch devices device m || goto chooseP
 CALL :TITLE 1
-CHOICE /C ASE /M "Press 'A' to accept and fix this controller, press 'S' to switch, and press 'E' to fix every controller"
+CHOICE /C ASE /M "Press 'A' to accept and fix this controller, press 'S' to switch, and press 'E' to fix every controller:"
 IF ERRORLEVEL 3 set device=%deviceB% & goto chooseP
 IF ERRORLEVEL 2 goto chooseD
 set device="%device%"
@@ -72,14 +72,14 @@ for /f "delims=" %%t in ('dir /a-d /b /s ^| findstr /eil "1r.png"') do set "bt=%
 call :switch buttonT tex m || goto patch
 set "tpp=%tex:*\=%"
 CALL :TITLE 2
-CHOICE /C AS /M "Press 'A' to accept and use this texture, press 'S' to switch"
+CHOICE /C AS /M "Press 'A' to accept and use this texture, press 'S' to switch:"
 IF ERRORLEVEL 2 goto chooseT
 
 set "tex3=%tex%"
 set "tpp3=%tpp%"
 if %ask2%==false goto chooseTr
 echo.
-choice /m "Do you want to use separate icons for different controllers"
+choice /m "BETA - Do you want to use separate icons for different controllers?"
 if errorlevel 2 goto chooseTr
 call :switchT buttonT 3
 
