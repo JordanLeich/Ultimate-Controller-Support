@@ -5,7 +5,7 @@ REM Paste the path to the game here, instead of being prompted each time:
 set "MUApath="
 REM Ask to use 2nd controller texture? (yes =true; no, use only 1 set of icons =false)
 set ask2=true
-REM Ask to change button prompt colours? (yes =true; no =false)
+REM Ask to change button challenge colour effects? (yes =true; no =false)
 set askc=true
 REM Language? (define the language suffix =eng; =ita)
 set lang=eng
@@ -33,11 +33,11 @@ echo.
 choice /c %opt% /m "Fix controller button mapping or install controller button textures"
 echo.
 if errorlevel 4 EXIT
-if errorlevel 3 goto readT
+if errorlevel 3 goto askCT
 if %errorlevel%==1 set opt=
 
 for /f "delims=" %%d in ('reg query "%RKL%"') do if not "%%~nd"=="BXNoneDevice" if not "%%~nd"=="BXKeyboard" set devices=!devices!"%%~nd" 
-if not defined devices goto chooseP
+if ""=="%devices%" goto chooseP
 set deviceB=%devices:~,-1%
 
 :chooseD
@@ -58,12 +58,13 @@ set pn=%errorlevel%
 if errorlevel 5 set pn=All
 if defined opt goto patch
 
+:askCT
+if defined devices set ds=2& goto readT
+echo [3] Xbox 360 controllers, genuine or emulated
+echo [A] All other controllers
+choice /c A3 /m "Select your button layout type"
+set /a ds=%errorlevel%+1
 :readT
-set ds=2
-if ""=="%devices%" (
- choice /m "Do you want to add textures for an Xbox 360 emulated or genuine controller"
- if not errorlevel 2 set ds=3
-)
 for /f "delims=" %%t in ('dir /ad /b /s ^| findstr /ei "\texs"') do set "bt=%%~t\" & call :addBT buttonT
 for /f "delims=" %%t in ('dir /a-d /b /s ^| findstr /eil "1r.png"') do set "bt=%%~dpt" & call :addBT buttonTr
 
