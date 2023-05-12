@@ -37,7 +37,7 @@ if errorlevel 3 goto askCT
 if %errorlevel%==1 set opt=
 
 for /f "delims=" %%d in ('reg query "%RKL%"') do if not "%%~nd"=="BXNoneDevice" if not "%%~nd"=="BXKeyboard" set devices=!devices!"%%~nd" 
-if ""=="%devices%" goto chooseP
+if []==[%devices%] goto chooseP
 set deviceB=%devices:~,-1%
 
 :chooseD
