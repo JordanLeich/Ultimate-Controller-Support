@@ -20,6 +20,15 @@ set devcode=AU
 set opt=BFT
 setlocal enableDelayedExpansion
 
+choice /C yn /M "Are you using the remastered interface mod?"
+if errorlevel 2 (
+    echo You are not using the remastered interface mod.
+    REM Do something if the user is not using the mod
+) else (
+    echo You are using the remastered interface mod.
+    REM Do something if the user is using the mod
+)
+
 :chooseO
 set m=
 if defined FBdone set opt=BFTX& if defined ITdone set Bdone=%sm%

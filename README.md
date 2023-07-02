@@ -20,8 +20,9 @@ Fixes and adds additional controller support for Ultimate Alliance PC 2006 versi
 - Italian language (Fullkeyset_ita) is not supported.
 - If Easy Install.bat doesnt open for you or isnt working properly, try using the file called Add required system environment variables.bat found in the tools folder. Then rerun Easy Install.bat.
 
---- v6.3 CHANGES ---
+--- v6.4 CHANGES ---
 * Wording and formatting improvements made to Easy Install.bat.
 * Added a new troubleshooting tool that adds the required system environmental variables in order for Easy Install.bat to work properly.
+* 
 
 Ultimate Controller Support by: Rampage, Crescendo for testing, ak2yny for bug finding, testing, batch tool, BaconWizard17 for certain texs presets, ImageMagik for the convert.exe - https://github.com/ImageMagick/ImageMagick
