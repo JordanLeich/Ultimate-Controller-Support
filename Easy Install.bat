@@ -9,6 +9,8 @@ REM Ask to change button challenge colour effects? (yes =true; no =false)
 set askc=true
 REM Language? (define the language suffix =eng; =ita)
 set lang=eng
+REM Which HUD texture does the controller use? (All =Logitech; Never seen, but Enchlore reported that his Logitech controller uses the 360 text =360; needs more testing)
+set HUDc=Logitech
 REM This is the location of the registry keys (where the controllers are located with their key bindings):
 set RKL=HKEY_CURRENT_USER\SOFTWARE\Activision\Marvel Ultimate Alliance\Controls\DeviceConfig
 
@@ -20,14 +22,9 @@ set devcode=AU
 set opt=BFT
 setlocal enableDelayedExpansion
 
-choice /C yn /M "Are you using the remastered interface mod?"
-if errorlevel 2 (
-    echo You are not using the remastered interface mod.
-    REM Do something if the user is not using the mod
-) else (
-    echo You are using the remastered interface mod.
-    REM Do something if the user is using the mod
-)
+choice /M "Are you using ak2yny's HUD and the big font from the remastered interface mods"
+if not errorlevel 2 set RIsfx=r
+CLS
 
 :chooseO
 set m=
@@ -212,7 +209,8 @@ EXIT /b
 :pT
 mkdir "%tp%\" >nul 2>nul
 set k=Fullkeyset
-set f=FontTexture0_beenox
+set f=%RIsfx%FontTexture0_beenox
+set h=%RIsfx%HudLogitech
 call :TexFB 1
 call :TexCY %f% 1 Logitech
 call :TexCY %f% 1 Logitech _hd
@@ -222,10 +220,10 @@ call :TexFB %ds%
 call :TexCY %f% %ds:2=1% 360
 call :TexCY %f% %ds:2=1% 360 _hd
 set k=%k%_%lang%.png
+if not exist "%~dp0\textures\%k%" copy "%~dp0\textures\Fullkeyset_eng.png" "%~dp0\textures\%k%"
 tools\convert -background none "%~dp0\textures\%k%" %k1%  !k%ds%! -layers flatten "%tp%\%k%"
+copy /y "%sp%\%h%.png" "%tp%\Hud%HUDc%.png" || copy /y "%~dp0%tex4%\texs\%h%.png" "%tp%\Hud%HUDc%.png"
 REM if %devcode% LEQ 3 set ds=3
-rem ??? REUI, which has no fullkeyset
-rem ??? Fullkeyset_ita
 EXIT /b
 :TexFB
 set t=0
@@ -242,14 +240,22 @@ copy /y "%sp%\%1%2%4.png" "%tp%\%1%3%4.png" || copy /y "%~dp0textures\%fb%\texs\
 EXIT /b
 
 :pC
-(call :replCol)>"%temp%\%fm%.ps1"
-Powershell -executionpolicy remotesigned -File "%temp%\%fm%.ps1"
-if %errorlevel% NEQ 0 EXIT /b 1
-del "%temp%\%fm%.ps1"
+set rpl=-replace '%vl%.* ;'
+set "pc=$fc = Get-Content -Path '%ix%'; "
+set pc=%pc%$fc[388] = $fc[388] %rpl%,'%A%'; 
+set pc=%pc%$fc[394] = $fc[394] %rpl%,'%S%'; 
+set pc=%pc%$fc[400] = $fc[400] %rpl%,'%U%'; 
+set pc=%pc%$fc[406] = $fc[406] %rpl%,'%J%'; 
+set "pc=%pc%Set-Content -Path '%tx%' -Value $fc"
+Powershell "%pc%" || EXIT /b
 mkdir "%dp%" >nul 2>nul
 tools\xmlb-compile -s "%tx%" "%ox%"
 del "%tx%"
 EXIT /b
+(call :replCol)>"%temp%\%fm%.ps1"
+Powershell -executionpolicy remotesigned -File "%temp%\%fm%.ps1"
+if %errorlevel% NEQ 0 EXIT /b 1
+del "%temp%\%fm%.ps1"
 
 :pcol
 set A=%vl%0.26 0.72 1 1 ;
