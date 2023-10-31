@@ -23,7 +23,7 @@ set opt=BFT
 setlocal enableDelayedExpansion
 
 choice /M "Are you using ak2yny's HUD and the big font from the remastered interface mods"
-if not errorlevel 2 set RIsfx=r
+if not errorlevel 2 set RI=r
 CLS
 
 :chooseO
@@ -209,8 +209,8 @@ EXIT /b
 :pT
 mkdir "%tp%\" >nul 2>nul
 set k=Fullkeyset
-set f=%RIsfx%FontTexture0_beenox
-set h=%RIsfx%HudLogitech
+set f=FontTexture0_beenox
+set h=HudLogitech
 call :TexFB 1
 call :TexCY %f% 1 Logitech
 call :TexCY %f% 1 Logitech _hd
@@ -222,7 +222,7 @@ call :TexCY %f% %ds:2=1% 360 _hd
 set k=%k%_%lang%.png
 if not exist "%~dp0\textures\%k%" copy "%~dp0\textures\Fullkeyset_eng.png" "%~dp0\textures\%k%"
 tools\convert -background none "%~dp0\textures\%k%" %k1%  !k%ds%! -layers flatten "%tp%\%k%"
-copy /y "%sp%\%h%.png" "%tp%\Hud%HUDc%.png" || copy /y "%~dp0%tex4%\texs\%h%.png" "%tp%\Hud%HUDc%.png"
+copy /y "%sp%\%RI%%h%.png" "%tp%\Hud%HUDc%.png" || copy /y "%~dp0%tex4%\texs\%RI%%h%.png" "%tp%\Hud%HUDc%.png"
 REM if %devcode% LEQ 3 set ds=3
 EXIT /b
 :TexFB
@@ -236,7 +236,7 @@ if exist "%sp%\%k%%1.png" ( set k%1="%sp%\%k%%1.png"%tr%
 ) else set k%1="%~dp0textures\%fb%\texs\%k%%1.png"%tr%
 EXIT /b
 :TexCY
-copy /y "%sp%\%1%2%4.png" "%tp%\%1%3%4.png" || copy /y "%~dp0textures\%fb%\texs\%1%2%4.png" "%tp%\%1%3%4.png"
+copy /y "%sp%\%RI%%1%2%4.png" "%tp%\%1%3%4.png" || copy /y "%~dp0textures\%fb%\texs\%RI%%1%2%4.png" "%tp%\%1%3%4.png"
 EXIT /b
 
 :pC
