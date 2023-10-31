@@ -18,11 +18,6 @@ A mod that fixes and adds additional controller support for Ultimate Alliance PC
 - For other languages (Italian/Fullkeyset_ita) edit Easy Install.bat and change the `lang=eng` setting in the top section.
 - If Easy Install.bat doesnt open for you or isnt working properly, try using the file called Add required system environment variables.bat found in the tools folder. Then rerun Easy Install.bat.
 
-## v6.4 Changes ✨
-* Wording and formatting improvements made to Easy Install.bat.
-* Added a new troubleshooting tool that adds the required system environmental variables in order for Easy Install.bat to work properly.
-* UCS + Remastered Interface compatibility.
-
 ### Credits ❤️
 * Rampage for mod creation
 * Crescendo for testing
