@@ -15,7 +15,7 @@ A mod that fixes and adds additional controller support for Ultimate Alliance PC
 - Switch to manual in controller configuration setting in MUA options if the configuration is set to automatic and doesn't work properly.
 - Switch to automatic if using a standard layout setup (genuine Xbox 360 controller or 360 emu) or if manual doesn't work for you.
 - Low resolutions (640x480, 800x600) are not fully supported.
-- Italian language (Fullkeyset_ita) is not supported.
+- For other languages (Italian/Fullkeyset_ita) edit Easy Install.bat and change the `lang=eng` setting in the top section.
 - If Easy Install.bat doesnt open for you or isnt working properly, try using the file called Add required system environment variables.bat found in the tools folder. Then rerun Easy Install.bat.
 
 ## v6.4 Changes ✨
