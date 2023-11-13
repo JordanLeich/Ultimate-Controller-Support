@@ -31,9 +31,9 @@ set m=
 if defined FBdone set opt=BFTX& if defined ITdone set Bdone=%sm%
 if defined ITdone set opt=BFTX
 CALL :TITLE 0
-echo [B] Both                       %Bdone%
-echo [F] Fix button mapping only    %FBdone%
-echo [T] Apply button textures only %ITdone%
+echo [B] Both                    %Bdone%
+echo [F] Fix button mapping only %FBdone%
+echo [T] Apply button icons only %ITdone%
 if %opt%==BFTX echo [X] Done. Close console.
 echo.
 choice /c %opt% /m "Please select an option:"
@@ -78,7 +78,7 @@ for /f "delims=" %%t in ('dir /a-d /b /s ^| findstr /eil "1r.png"') do set "bt=%
 call :switch buttonT tex m || goto patch
 set "tpp=%tex:*\=%"
 CALL :TITLE 2
-CHOICE /C AS /M "Press 'A' to accept and use this texture, press 'S' to switch:"
+CHOICE /C AS /M "Press 'A' to accept and use these icons, press 'S' to switch:"
 IF ERRORLEVEL 2 goto chooseT
 
 set "tex3=%tex%"
@@ -151,21 +151,21 @@ CLS
 IF %1 EQU 1 ECHO.
 IF %1 GEQ 1 ECHO %dev%
 IF %1 LEQ 1 GOTO TEND
-ECHO Player:      %pn%
+ECHO Player:    %pn%
 IF %1 EQU 2 ECHO.
-ECHO Texture:     "%tpp:\= - %"
+ECHO Icons:     "%tpp:\= - %"
 IF %1 LEQ 2 GOTO TEND
 IF %1 EQU 3 ECHO.
-ECHO Texture Alt: "%tpp3:\= - %"
+ECHO Icons Alt: "%tpp3:\= - %"
 IF %1 LEQ 3 GOTO TEND
 IF %1 EQU 4 GOTO TPSTR
 IF %1 EQU 5 GOTO TPSTR
-ECHO Path:        "%MUApath%"
+ECHO Path:      "%MUApath%"
 GOTO TEND
 :TPSTR
 ECHO.
 ECHO Please choose a PS icon set to go with the transparent icons.
-ECHO PS Texture:  "!tpp%1:\= - !"
+ECHO PS Icons:  "!tpp%1:\= - !"
 :TEND
 ECHO.
 EXIT /B
@@ -178,7 +178,7 @@ EXIT /b
 call :switch %1 tex%2 m || EXIT /b
 set "tpp%2=!tex%2:*\=!"
 CALL :TITLE %2
-CHOICE /C AS /M "Press 'A' to accept and use this texture, press 'S' to switch"
+CHOICE /C AS /M "Press 'A' to accept and use these icons, press 'S' to switch"
 IF ERRORLEVEL 2 goto switchT
 SET m=
 EXIT /B
