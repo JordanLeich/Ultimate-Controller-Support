@@ -15,7 +15,7 @@ REM Check if the paths already exist in the system environment variable "Path"
 for /f "skip=2 tokens=1,2*" %%n in ('REG query "HKLM\System\CurrentControlSet\Control\Session Manager\Environment" /v "Path" 2^>nul') do if /i "%%n" == "Path" set "PATH_M=%%p"
 setlocal enableDelayedExpansion
 for %%p in ("C:\Windows\system32" "C:\Windows\System32\WindowsPowerShell\v1.0") do (
-    echo "%PATH_M%" | find /i /v "%%~p;" | find /i /v "%%~p\;" >nul && set "newPath=!newPath!%%~p;"
+    call echo "%PATH_M%" | find /i /v "%%~p;" | find /i /v "%%~p\;" >nul && set "newPath=!newPath!%%~p;"
 )
 if "%newPath%"=="" (
     echo Paths already exist in the "Path" variable.
@@ -23,17 +23,13 @@ if "%newPath%"=="" (
     exit /b
 )
 
-REM Add paths to the system environment variable "Path"
-set "PATH_M=%newPath%%PATH_M%"
-setx PATH "%PATH_M:;;=;%" /M
-
-REM Display updated environment variables
+REM Add paths to the system environment variable "Path" and Display updated environment variables
 echo.
 echo Environment variables updated successfully.
 echo.
-echo Current "Path" variable value:
-echo ------------------------------
-echo %PATH%
+echo Current system "Path" variable value:
+echo -------------------------------------
+PowerShell "$envkey = 'registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment'; $NPath = '%newPath%' -split ';' -ne ''; $MPath = ((Get-Item -LiteralPath $envkey).GetValue('Path', '', 'DoNotExpandEnvironmentNames') -split ';' -ne '') | ? {$_.TrimEnd('/').TrimEnd('\') -notin $NPat}; $MPath = $NPath + $MPath ; sp -Type ExpandString -LiteralPath $envkey Path ($MPath -join ';'); $MPath"
 echo.
 
 pause
