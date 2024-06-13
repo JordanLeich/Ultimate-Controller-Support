@@ -21,13 +21,11 @@ set pn=N/A
 set devcode=AU
 set opt=BFT
 setlocal enableDelayedExpansion
-
-choice /M "Are you using ak2yny's HUD and the big font from the remastered interface mods"
-if not errorlevel 2 set RI=r
 CLS
 
 :chooseO
 set m=
+set buttonT=
 if defined FBdone set opt=BFTX& if defined ITdone set Bdone=%sm%
 if defined ITdone set opt=BFTX
 CALL :TITLE 0
@@ -68,11 +66,16 @@ if defined opt goto patch
 if defined devices set ds=2& goto readT
 echo [3] Xbox 360 controllers, genuine or emulated
 echo [A] All other controllers
+echo.
 choice /c A3 /m "Select your button layout type"
 set /a ds=%errorlevel%+1
 :readT
 for /f "delims=" %%t in ('dir /ad /b /s ^| findstr /ei "\texs"') do set "bt=%%~t\" & call :addBT buttonT
 for /f "delims=" %%t in ('dir /a-d /b /s ^| findstr /eil "1r.png"') do set "bt=%%~dpt" & call :addBT buttonTr
+
+echo.
+choice /M "Are you using ak2yny's HUD and the big font from the remastered interface mods"
+if not errorlevel 2 set RI=r
 
 :chooseT
 call :switch buttonT tex m || goto patch
@@ -130,11 +133,10 @@ set fm=fix%devcode:~-2%mapping
 
 if defined devices (
  (call :pR)>"%temp%\%fm%.reg"
- "%temp%\%fm%.reg"
+ "%temp%\%fm%.reg" && del "%temp%\%fm%.reg"
  set FBdone=%sm%
 )
-if %errorlevel% EQU 0 ( del "%temp%\%fm%.reg"
-) else set tex=& set FBdone=
+if %errorlevel% GTR 0 set tex=& set FBdone=
 
 if defined tex call :pT && set ITdone=%sm% && if defined A call :pC
 
@@ -211,17 +213,19 @@ mkdir "%tp%\" >nul 2>nul
 set k=Fullkeyset
 set f=FontTexture0_beenox
 set h=HudLogitech
-call :TexFB 1
-call :TexCY %f% 1 Logitech
-call :TexCY %f% 1 Logitech _hd
-set "sp=%~dp0%tex3%\texs"
+set bl=1
 if "%device:"=%" == "Controller (XBOX 360 For Windows)" set ds=3
+if %ds%==3 set bl=4
+call :TexFB %bl%
+call :TexCY %f% %bl:4=3% Logitech
+call :TexCY %f% %bl:4=3% Logitech _hd
+set "sp=%~dp0%tex3%\texs"
 call :TexFB %ds%
 call :TexCY %f% %ds:2=1% 360
 call :TexCY %f% %ds:2=1% 360 _hd
 set k=%k%_%lang%.png
 if not exist "%~dp0\textures\%k%" copy "%~dp0\textures\Fullkeyset_eng.png" "%~dp0\textures\%k%"
-tools\convert -background none "%~dp0\textures\%k%" %k1%  !k%ds%! -layers flatten "%tp%\%k%"
+tools\convert -background none "%~dp0\textures\%k%" !k%bl%!  !k%ds%! -layers flatten "%tp%\%k%"
 copy /y "%sp%\%RI%%h%.png" "%tp%\Hud%HUDc%.png" || copy /y "%~dp0%tex4%\texs\%RI%%h%.png" "%tp%\Hud%HUDc%.png"
 REM if %devcode% LEQ 3 set ds=3
 EXIT /b
@@ -229,7 +233,7 @@ EXIT /b
 set t=0
 if %1==1 set "fb=PC Icons & Buttons\Default Logitech Icons" & set t=4
 if %1==2 set "fb=Xbox Controllers\Xbox One Buttons\Default" & set t=5
-if %1==3 set "fb=Xbox Controllers\Xbox 360 Buttons"
+if %1 GEQ 3 set "fb=Xbox Controllers\Xbox 360 Buttons"
 if exist "%sp%\%k%%1r.png" set tr= "%sp%\%k%%1r.png"
 if defined tex%t% set tr= "%~dp0!tex%t%!\texs\%k%%1r.png"
 if exist "%sp%\%k%%1.png" ( set k%1="%sp%\%k%%1.png"%tr%
