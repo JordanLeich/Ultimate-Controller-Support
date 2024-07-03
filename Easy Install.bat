@@ -113,7 +113,7 @@ set vl=value =
 set pl=unk
 echo "%tex%" | find /i "\ps" >nul && set pl=ps2, ps3, 
 echo "%tex%" | find /i "\xbox" >nul && set pl=xbox, 360, 
-find "%pl%pc" "%ox%" >nul && goto patch
+find "%pl%pc" "%ox%" >nul 2>nul && goto patch
 if %pl:~,1%==p call :pcol & goto patch
 if %pl:~,1%==x call :xcol & goto patch
 
@@ -226,7 +226,7 @@ call :TexCY %f% %ds:2=1% 360 _hd
 set k=%k%_%lang%.png
 if not exist "%~dp0\textures\%k%" copy "%~dp0\textures\Fullkeyset_eng.png" "%~dp0\textures\%k%"
 tools\convert -background none "%~dp0\textures\%k%" !k%bl%!  !k%ds%! -layers flatten "%tp%\%k%"
-copy /y "%sp%\%RI%%h%.png" "%tp%\Hud%HUDc%.png" || copy /y "%~dp0%tex4%\texs\%RI%%h%.png" "%tp%\Hud%HUDc%.png"
+copy /y "%sp%\%RI%%h%.png" "%tp%\Hud%HUDc%.png" >nul || copy /y "%~dp0%tex4%\texs\%RI%%h%.png" "%tp%\Hud%HUDc%.png"
 REM if %devcode% LEQ 3 set ds=3
 EXIT /b
 :TexFB
@@ -240,7 +240,7 @@ if exist "%sp%\%k%%1.png" ( set k%1="%sp%\%k%%1.png"%tr%
 ) else set k%1="%~dp0textures\%fb%\texs\%k%%1.png"%tr%
 EXIT /b
 :TexCY
-copy /y "%sp%\%RI%%1%2%4.png" "%tp%\%1%3%4.png" || copy /y "%~dp0textures\%fb%\texs\%RI%%1%2%4.png" "%tp%\%1%3%4.png"
+copy /y "%sp%\%RI%%1%2%4.png" "%tp%\%1%3%4.png" >nul || copy /y "%~dp0textures\%fb%\texs\%RI%%1%2%4.png" "%tp%\%1%3%4.png"
 EXIT /b
 
 :pC
