@@ -106,7 +106,7 @@ set "MUApath=%MUApath:"=%"
 set "tp=%MUApath%\texs"
 set "sp=%~dp0%tex%\texs"
 set "dp=%MUApath%\data\"
-set "ix=%~dp0tools\colors.txt"
+set "ix=%~dp0tools\colors%RI%.txt"
 set "tx=%temp%\colors.txt"
 set "ox=%dp%colors.xmlb"
 set vl=value = 
