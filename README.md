@@ -1,14 +1,18 @@
-# Ultimate-Controller-Support 🎮
-A mod that fixes and adds additional controller support for Ultimate Alliance PC 2006 version only. 
+# Ultimate Controller Support 🎮
+A mod designed to enhance and expand controller support for the 2006 PC version of Ultimate Alliance.
 
-## Easy Installation
-1. Extract the Ultimate Controller Support rar file wherever you like.
-2. Open the Easy Install.bat file and follow the prompts accordingly based upon your controller type.
+## Download the Latest Release
+First, download the latest release from [here](https://github.com/JordanLeich/Ultimate-Controller-Support/releases).
 
-## Mod Organizer 2 Installation
-1. Extract the Ultimate Controller Support rar file wherever you like.
-2. Open the Easy Install.bat file and follow the prompts accordingly. You can paste a MO2 mod folder when installing textures.
-3. Open the Mod Organizer 2 Install Method folder and find the .rar file for the textures of the controller type you want. Install that .rar file into MO2. You can skip this step if using Easy Install.bat worked for you.
+### Easy Installation
+Extract the "Ultimate Controller Support" .rar file to any location.
+Run the Easy Install.bat file and follow the on-screen prompts based on your controller type.
+
+### Mod Organizer 2 (MO2) Installation
+Extract the "Ultimate Controller Support" .rar file to any location.
+Run the Easy Install.bat file and follow the prompts. You can paste a MO2 mod folder when installing textures.
+Navigate to the "Mod Organizer 2 Install Method" folder and locate the .rar file for your specific controller’s textures. Install this file into MO2.
+Note: If the Easy Install.bat completed successfully, you can skip this step.
 
 ## Important Notes 📓
 - The UCS has nothing to do with bluetooth or not, or if your controller works on the PC or in the game. For the UCS to work, your controller MUST have been recognized by the game before.
