@@ -74,8 +74,16 @@ for /f "delims=" %%t in ('dir /ad /b /s ^| findstr /ei "\texs"') do set "bt=%%~t
 for /f "delims=" %%t in ('dir /a-d /b /s ^| findstr /eil "1r.png"') do set "bt=%%~dpt" & call :addBT buttonTr
 
 echo.
-choice /M "Are you using ak2yny's HUD and the big font from the remastered interface mods"
-if not errorlevel 2 set RI=r
+echo Are you using ak2yny's HUD or the big font from the remastered interface mods?
+echo [Y] Yes, both.
+echo [F] Big font only.
+echo [H] Remaster HUD by ak2yny only.
+echo [N] No.
+echo Note: Say no, if you use the Remaster UI, but the small font and the default or one of UltraMegaMagnus' HUDs.
+choice /c NFHY
+if errorlevel 4 set RI=r
+if errorlevel 3 set RH=r& goto chooseT
+if errorlevel 2 set RI=r
 
 :chooseT
 call :switch buttonT tex m || goto patch
@@ -226,7 +234,7 @@ call :TexCY %f% %ds:2=1% 360 _hd
 set k=%k%_%lang%.png
 if not exist "%~dp0\textures\%k%" copy "%~dp0\textures\Fullkeyset_eng.png" "%~dp0\textures\%k%"
 tools\convert -background none "%~dp0\textures\%k%" !k%bl%!  !k%ds%! -layers flatten "%tp%\%k%"
-copy /y "%sp%\%RI%%h%.png" "%tp%\Hud%HUDc%.png" >nul || copy /y "%~dp0%tex4%\texs\%RI%%h%.png" "%tp%\Hud%HUDc%.png"
+copy /y "%sp%\%RH%%h%.png" "%tp%\Hud%HUDc%.png" >nul || copy /y "%~dp0%tex4%\texs\%RH%%h%.png" "%tp%\Hud%HUDc%.png"
 REM if %devcode% LEQ 3 set ds=3
 EXIT /b
 :TexFB
