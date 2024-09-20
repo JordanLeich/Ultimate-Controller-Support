@@ -80,17 +80,18 @@ def check_for_updates():
     
     saved_version = get_saved_version()
     
-    if saved_version is None:
+    try:
+        if float(latest_version[1:]) > float(saved_version[1:]):
+            print(f"Update available! Latest version: {latest_version}. Your version: {saved_version}.")
+            print("Downloading the latest version...")
+            download_and_extract_zip(latest_version)
+            save_version(latest_version)
+            print("Update process completed successfully.")
+        else:
+            print(f"Your version ({saved_version}) is up to date.")
+    except:
         print(f"No saved version found. Saving the latest version ({latest_version}).")
         save_version(latest_version)
-    elif latest_version != saved_version:
-        print(f"Update available! Latest version: {latest_version}. Your version: {saved_version}.")
-        print("Downloading the latest version...")
-        download_and_extract_zip(latest_version)
-        save_version(latest_version)
-        print("Update process completed successfully.")
-    else:
-        print(f"Your version ({saved_version}) is up to date.")
 
     print("Update check completed.")
 
