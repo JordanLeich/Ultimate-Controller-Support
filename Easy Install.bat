@@ -108,7 +108,7 @@ call :PStrSw buttonTr 5 tpp3
 
 :chooseL
 echo.
-if "%MUApath%"=="" set /p "MUApath=Please paste or type the path to MUA or an MO2 mod folder here: " || goto chooseL
+if "%MUApath%"=="" set /p "MUApath=Note* Easy Install.bat cannot work with protected folders in Windows. Please paste or type the path to MUA or an MO2 mod folder here: " || goto chooseL
 set "MUApath=%MUApath:"=%"
 
 set "tp=%MUApath%\texs"

@@ -22,6 +22,7 @@ Note: If the Easy Install.bat completed successfully, you can skip this step.
 - Low resolutions (640x480, 800x600) are not fully supported.
 - For other languages (Italian/Fullkeyset_ita) edit Easy Install.bat and change the `lang=eng` setting in the top section.
 - If Easy Install.bat doesnt open for you or isnt working properly, try using the file called Add required system environment variables.bat found in the tools folder. Then rerun Easy Install.bat.
+- Easy Install.bat cannot work with protected folders in Windows, those folders include: C:\Program Files, C:\Program Files (x86), C:\Windows, C:\Windows\System32, C:\Users<YourUsername>\AppData, C:\ProgramData, and C:\Windows\System
 
 ### Credits ❤️
 * Rampage for mod creation
