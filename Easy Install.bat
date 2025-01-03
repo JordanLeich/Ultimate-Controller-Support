@@ -73,6 +73,8 @@ set /a ds=%errorlevel%+1
 for /f "delims=" %%t in ('dir /ad /b /s ^| findstr /ei "\texs"') do set "bt=%%~t\" & call :addBT buttonT
 for /f "delims=" %%t in ('dir /a-d /b /s ^| findstr /eil "1r.png"') do set "bt=%%~dpt" & call :addBT buttonTr
 
+set RH=
+set RI=
 echo.
 echo Are you using ak2yny's HUD or the big font from the remastered interface mods?
 echo [Y] Yes, both.
@@ -119,7 +121,7 @@ set "tx=%temp%\colors.txt"
 set "ox=%dp%colors.xmlb"
 set vl=value = 
 set pl=unk
-echo "%tex%" | find /i "\ps" >nul && set pl=ps2, ps3, 
+echo "%tex%" | find /i "\Playstation" >nul && set pl=ps2, ps3, 
 echo "%tex%" | find /i "\xbox" >nul && set pl=xbox, 360, 
 find "%pl%pc" "%ox%" >nul 2>nul && goto patch
 if %pl:~,1%==p call :pcol & goto patch
