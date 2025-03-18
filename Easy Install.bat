@@ -319,21 +319,7 @@ if %c% LSS 10 set c=0%c%
 if %c% LSS 100 set c=0%c%
 if %c:~-2%==00 (set /a %w:~0,1%=c/100) else set %w:~0,1%=%c:~0,-2%.%c:~-2%
 
-:commonMapping
-call :regMUA %1 Guard 48
-call :regMUA %1 HeroDown 42
-call :regMUA %1 HeroLeft 41
-call :regMUA %1 HeroRight 40
-call :regMUA %1 HeroUp 43
-call :regMUA %1 Jump 47
-call :regMUA %1 MoveDown 02
-call :regMUA %1 MoveLeft 01
-call :regMUA %1 MoveRight 00
-call :regMUA %1 MoveUp 03
-call :regMUA %1 ScrollMap 49
-EXIT /b
-
-:defaultMapping all other controllers
+REM :defaultMapping all other controllers
 call :regMUA %1 Attack 45
 call :regMUA %1 CallAllies 4a
 call :regMUA %1 CameraDown 0a
@@ -349,7 +335,7 @@ call :regMUA %1 Use 44
 goto commonMapping
 
 :fixMapping
-:defaultMapping Controller (XBOX 360 For Windows) 03 (genuine)
+REM :defaultMapping Controller (XBOX 360 For Windows) 03 (genuine)
 call :regMUA %1 Attack 44
 call :regMUA %1 CallAllies 04
 call :regMUA %1 CameraDown 08
@@ -362,7 +348,20 @@ call :regMUA %1 PowerMode 05
 call :regMUA %1 Smash 45
 call :regMUA %1 TeamManagement 4a
 call :regMUA %1 Use 46
-goto commonMapping
+
+:commonMapping
+call :regMUA %1 Guard 48
+call :regMUA %1 HeroDown 42
+call :regMUA %1 HeroLeft 41
+call :regMUA %1 HeroRight 40
+call :regMUA %1 HeroUp 43
+call :regMUA %1 Jump 47
+call :regMUA %1 MoveDown 02
+call :regMUA %1 MoveLeft 01
+call :regMUA %1 MoveRight 00
+call :regMUA %1 MoveUp 03
+call :regMUA %1 ScrollMap 49
+EXIT /b
 
 :regMUA
 echo [%RCS%%1\%2]
