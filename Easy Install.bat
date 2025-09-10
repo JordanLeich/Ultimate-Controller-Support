@@ -19,13 +19,13 @@ set sm=-- successfully completed
 set device=N/A
 set pn=N/A
 set devcode=AU
-set opt=BFT
 setlocal enableDelayedExpansion
 CLS
 
 :chooseO
 set m=
 set buttonT=
+set opt=BFT
 if defined FBdone set opt=BFTX& if defined ITdone set Bdone=%sm%
 if defined ITdone set opt=BFTX
 CALL :TITLE 0
@@ -40,6 +40,7 @@ if errorlevel 4 EXIT
 if errorlevel 3 goto askCT
 if %errorlevel%==1 set opt=
 
+set devices=
 for /f "delims=" %%d in ('reg query "%RKL%"') do if not "%%~nd"=="BXNoneDevice" if not "%%~nd"=="BXKeyboard" set devices=!devices!"%%~nd" 
 if []==[%devices%] goto chooseP
 set deviceB=%devices:~,-1%
@@ -47,9 +48,9 @@ set deviceB=%devices:~,-1%
 :chooseD
 call :switch devices device m || goto chooseP
 CALL :TITLE 1
-CHOICE /C ASE /M "Press 'A' to accept and fix this controller, press 'S' to switch, and press 'E' to fix every controller:"
-IF ERRORLEVEL 3 set device=%deviceB% & goto chooseP
-IF ERRORLEVEL 2 goto chooseD
+choice /c ASE /m "Press 'A' to accept and fix this controller, press 'S' to switch, and press 'E' to fix every controller:"
+if errorlevel 3 set device=%deviceB% & goto chooseP
+if errorlevel 2 goto chooseD
 set device="%device%"
 call :readDC %device%
 
@@ -91,8 +92,8 @@ if errorlevel 2 set RI=r
 call :switch buttonT tex m || goto patch
 set "tpp=%tex:*\=%"
 CALL :TITLE 2
-CHOICE /C AS /M "Press 'A' to accept and use these icons, press 'S' to switch:"
-IF ERRORLEVEL 2 goto chooseT
+choice /c AS /m "Press 'A' to accept and use these icons, press 'S' to switch:"
+if errorlevel 2 goto chooseT
 
 set "tex3=%tex%"
 set "tpp3=%tpp%"
@@ -157,27 +158,27 @@ pause
 goto chooseO
 
 :TITLE
-SET "dev=Controller:  %device:"=%"
+SET "dev=Controller: %device:"=%"
 IF %1 GTR 1 SET "dev=%dev% -- %devcode:~-2%"
 CLS
 IF %1 EQU 1 ECHO.
 IF %1 GEQ 1 ECHO %dev%
 IF %1 LEQ 1 GOTO TEND
-ECHO Player:    %pn%
+ECHO Player:     %pn%
 IF %1 EQU 2 ECHO.
-ECHO Icons:     "%tpp:\= - %"
+ECHO Icons:      "%tpp:\= - %"
 IF %1 LEQ 2 GOTO TEND
 IF %1 EQU 3 ECHO.
-ECHO Icons Alt: "%tpp3:\= - %"
+ECHO Icons Alt:  "%tpp3:\= - %"
 IF %1 LEQ 3 GOTO TEND
 IF %1 EQU 4 GOTO TPSTR
 IF %1 EQU 5 GOTO TPSTR
-ECHO Path:      "%MUApath%"
+ECHO Path:       "%MUApath%"
 GOTO TEND
 :TPSTR
 ECHO.
 ECHO Please choose a PS icon set to go with the transparent icons.
-ECHO PS Icons:  "!tpp%1:\= - !"
+ECHO PS Icons:   "!tpp%1:\= - !"
 :TEND
 ECHO.
 EXIT /B
@@ -190,8 +191,8 @@ EXIT /b
 call :switch %1 tex%2 m || EXIT /b
 set "tpp%2=!tex%2:*\=!"
 CALL :TITLE %2
-CHOICE /C AS /M "Press 'A' to accept and use these icons, press 'S' to switch"
-IF ERRORLEVEL 2 goto switchT
+choice /c AS /m "Press 'A' to accept and use these icons, press 'S' to switch"
+if errorlevel 2 goto switchT
 SET m=
 EXIT /B
 
@@ -266,10 +267,6 @@ mkdir "%dp%" >nul 2>nul
 tools\xmlb-compile -s "%tx%" "%ox%"
 del "%tx%"
 EXIT /b
-(call :replCol)>"%temp%\%fm%.ps1"
-Powershell -executionpolicy remotesigned -File "%temp%\%fm%.ps1"
-if %errorlevel% NEQ 0 EXIT /b 1
-del "%temp%\%fm%.ps1"
 
 :pcol
 set A=%vl%0.26 0.72 1 1 ;
@@ -293,16 +290,6 @@ set w=%1
 set %w:~,1%=%vl%%R% %G% %B% 1 ;
 EXIT /b
 
-:replCol
-set rpl=-replace '%vl%.* ;'
-echo $fc = Get-Content -Path "%ix%"
-echo $fc[388] = $fc[388] %rpl%,'%A%'
-echo $fc[394] = $fc[394] %rpl%,'%S%'
-echo $fc[400] = $fc[400] %rpl%,'%U%'
-echo $fc[406] = $fc[406] %rpl%,'%J%'
-echo Set-Content -Path "%tx%" -Value $fc
-EXIT /b
-
 :askCol
 set w=%1
 set /p c=%1: || goto askCol
@@ -317,7 +304,7 @@ if %c% LSS 0 goto askCol
 set /a c=c*100/255
 if %c% LSS 10 set c=0%c%
 if %c% LSS 100 set c=0%c%
-if %c:~-2%==00 (set /a %w:~0,1%=c/100) else set %w:~0,1%=%c:~0,-2%.%c:~-2%
+if %c:~-2%==00 (set /a %w:~,1%=c/100) else set %w:~,1%=%c:~0,-2%.%c:~-2%
 
 REM :defaultMapping all other controllers
 call :regMUA %1 Attack 45
@@ -402,7 +389,7 @@ set "%1=%v:"=%"
 EXIT /b
 
 :findInString var token outVar
-REM delimeter is customized for this batch.
+REM delimiter is customized for this batch.
 if "%~3" == "" (set outVar=%~1) else set outVar=%~3
 call set "search=%%%~1%%"
 for /f "tokens=%2 delims=:" %%s in ("%search%") do set %outVar%=%%s
