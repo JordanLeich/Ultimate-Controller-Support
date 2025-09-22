@@ -1,32 +1,59 @@
-# Ultimate Controller Support 🎮
-A mod designed to enhance and expand controller support for the 2006 PC version of Ultimate Alliance.
+# Ultimate Controller Support 🎮  
+A mod designed to enhance and expand controller support for the 2006 PC version of *Marvel: Ultimate Alliance*.
 
-## Download the Latest Release
-First, download the latest release from [here](https://github.com/JordanLeich/Ultimate-Controller-Support/releases).
+## 📥 Download the Latest Release  
+Get the newest version of the mod [here](https://github.com/JordanLeich/Ultimate-Controller-Support/releases).  
 
-### Easy Installation
-Extract the "Ultimate Controller Support" .rar file to any location.
-Run the Easy Install.bat file and follow the on-screen prompts based on your controller type.
+---
 
-### Mod Organizer 2 (MO2) Installation
-Extract the "Ultimate Controller Support" .rar file to any location.
-Run the Easy Install.bat file and follow the prompts. You can paste a MO2 mod folder when installing textures.
-Navigate to the "Mod Organizer 2 Install Method" folder and locate the .rar file for your specific controller’s textures. Install this file into MO2.
-Note: If the Easy Install.bat completed successfully, you can skip this step.
+## ⚡ Easy Installation  
+1. **Extract** the **Ultimate Controller Support** `.rar` file to any location.  
+2. **Run** `Easy Install.bat` and follow the on-screen prompts based on your controller type.  
 
-## Important Notes 📓
-- The UCS has nothing to do with bluetooth or not, or if your controller works on the PC or in the game. For the UCS to work, your controller MUST have been recognized by the game before.
-- When playing coop mode, it is best to have all players to first connect their controllers, and select them in the game (if not done already by playing together in a previous session). Then, run the Easy Install.bat file.
-- Switch to manual in controller configuration setting in MUA options if the configuration is set to automatic and doesn't work properly.
-- Switch to automatic if using a standard layout setup (genuine Xbox 360 controller or 360 emu) or if manual doesn't work for you.
-- Low resolutions (640x480, 800x600) are not fully supported.
-- For other languages (Italian/Fullkeyset_ita) edit Easy Install.bat and change the `lang=eng` setting in the top section.
-- If Easy Install.bat doesnt open for you or isnt working properly, try using the file called Add required system environment variables.bat found in the tools folder. Then rerun Easy Install.bat.
-- Easy Install.bat cannot work with protected folders in Windows, those folders include: C:\Program Files, C:\Program Files (x86), C:\Windows, C:\Windows\System32, C:\Users<YourUsername>\AppData, C:\ProgramData, and C:\Windows\System
+💡 **Tip:** If your button textures appear incorrect after using Easy Install, try selecting the *opposite* answer to the “What controller type are you using?” question. This fixes the issue for many users.
 
-### Credits ❤️
-* Rampage for mod creation
-* Crescendo for testing
-* ak2yny for bug finding, testing, batch tool
-* BaconWizard17 for an XB1 texs preset
-* [ImageMagik for the convert.exe](https://github.com/ImageMagick/ImageMagick)
+---
+
+## 🧩 Mod Organizer 2 (MO2) Installation  
+1. **Extract** the `.rar` file to any location.  
+2. **Run** `Easy Install.bat` and follow the prompts. You can paste a MO2 mod folder when installing textures.  
+3. Navigate to the **Mod Organizer 2 Install Method** folder and locate the `.rar` file for your specific controller textures. **Install** this file into MO2.  
+
+> **Note:** If Easy Install completes successfully, this step is optional.  
+
+---
+
+## ⚠️ Important Notes & Troubleshooting  
+Ultimate Controller Support (UCS) enhances controller textures and configurations, but **it does not guarantee plug-and-play controller recognition**. The game itself must already recognize your controller. UCS only modifies textures and configuration files—it does **not** handle:  
+- Bluetooth connectivity  
+- Drivers or third-party controller tools  
+- Steam Controller configurations  
+
+### Before You Start  
+- **Controller Recognition:** Your controller must already work in-game before UCS can apply textures. Prior to starting the game, check if your controller is recognized [here](https://hardwaretester.com/gamepad).
+- **Co-op Play:** All players should connect their controllers and select them in-game (or from a previous session) *before* running `Easy Install.bat`.  
+- **Configuration Settings:**  
+  - Switch to **Manual** in the MUA options if Automatic doesn’t work.  
+  - Use **Automatic** if you’re using a standard Xbox 360 layout or if Manual fails.  
+- **Low Resolutions:** 640×480 and 800×600 are not fully supported.  
+- **Language Support:** To use other languages (e.g., Italian), edit `Easy Install.bat` and change the `lang=eng` setting at the top.  
+- **Windows Protected Folders:** Easy Install cannot run from protected windows directories such as:  
+C:\Program Files
+C:\Program Files (x86)
+C:\Windows
+C:\Users<YourUsername>\AppData
+C:\ProgramData
+
+- **Environment Variables:** If Easy Install won’t open, run `Add required system environment variables.bat` (found in the `tools` folder), then retry Easy Install.
+
+### Getting Controller Icons to Work  
+If your controller icons still don’t display correctly, it’s up to **you** to troubleshoot drivers, Steam configs, or third-party tools. UCS can assist by providing texture files, but **you may need to adjust Steam controller settings, update drivers, or use other utilities** to achieve proper icon display.  
+
+---
+
+## ❤️ Credits  
+* **Rampage** – Mod creation  
+* **Crescendo** – Testing  
+* **ak2yny** – Bug finding, testing, batch tool  
+* **BaconWizard17** – Xbox One textures preset  
+* [ImageMagick](https://github.com/ImageMagick/ImageMagick) – `convert.exe` utility  
