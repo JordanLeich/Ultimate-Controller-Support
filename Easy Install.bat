@@ -77,10 +77,10 @@ for /f "delims=" %%t in ('dir /a-d /b /s ^| findstr /eil "1r.png"') do set "bt=%
 set RH=
 set RI=
 echo.
-echo Are you using ak2yny's HUD or the big font from the remastered interface mods?
+echo Are you using the NextGenHUD option of the MUA Patch or the big font from the remastered interface mods?
 echo [Y] Yes, both.
 echo [F] Big font only.
-echo [H] Remaster HUD by ak2yny only.
+echo [H] NextGenHUD option only.
 echo [N] No.
 echo Note: Say no, if you use the Remaster UI, but the small font and the default or one of UltraMegaMagnus' HUDs.
 choice /c NFHY
