@@ -236,8 +236,12 @@ call :TexCY %f% %ds:2=1% 360
 call :TexCY %f% %ds:2=1% 360 _hd
 set k=%k%_%lang%.png
 if not exist "%~dp0\textures\%k%" copy "%~dp0\textures\Fullkeyset_eng.png" "%~dp0\textures\%k%"
-tools\convert -background none "%~dp0\textures\%k%" !k%bl%!  !k%ds%! -layers flatten "%tp%\%k%"
-copy /y "%sp%\%RH%%h%.png" "%tp%\Hud%HUDc%.png" >nul || copy /y "%~dp0%tex4%\texs\%RH%%h%.png" "%tp%\Hud%HUDc%.png"
+tools\magick -background none "%~dp0\textures\%k%" !k%bl%!  !k%ds%! -layers flatten "%tp%\%k%"
+if exist "%sp%\%RH%%h%.png" ( set "ht=%sp%\%RH%%h%.png"
+) else set "ht=%~dp0%tex4%\texs\%RH%%h%.png"
+if defined RH (
+  tools\magick "%ht%" -background none -gravity north -extent 512x1024 "%tp%\Hud%HUDc%.png"
+) else copy /y "%ht%" "%tp%\Hud%HUDc%.png"
 REM if %devcode% LEQ 3 set ds=3
 EXIT /b
 :TexFB
